@@ -34,13 +34,13 @@ _____|_____|_____
   
   def player_one_turn
     puts "#{@player1}, input the numbered square you wish to place an X."
-    input = gets.chomp
+    input = gets.chomp.to_i
     input_checker(input)
   end
 
   def player_two_turn
     puts "#{@player2}, input the numbered square you wish to place an O."
-    input = gets.chomp
+    input = gets.chomp.to_i
     input_checker(input)
   end
 
@@ -61,16 +61,20 @@ _____|_____|_____
     end
   end
 
+
   def input_checker(input)
     begin
-      if input < 0 || input > 9
-        puts "#{input} is not a valid number, please picker between 1-9."
+      binding.pry
+      if input <= 0 || input >= 10
+        puts "#{input} is not a valid number, please pick between 1-9."
         redo_turn
+      else
+        square_checker(input)
+      end
     rescue => exception
+      puts exception
       puts "#{input} is not a valid input, please try again."
       redo_turn
-    else
-      square_checker(input)
     end
   end
 
@@ -89,9 +93,9 @@ _____|_____|_____
 
   def change_game_board_by_input(input)
     if @@turn_timer.odd?
-      player_one_picks.push(input)
+      
     else
-      player_two_picks.push(input)
+      
     end
     check_for_game_over
   end
