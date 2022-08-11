@@ -2,7 +2,7 @@
 require 'pry-byebug'
 
 class TicTacToe
-  attr_reader :game_board
+  attr_reader :game_board, :game_board_start
 
   @player1 = ''
   @player2 = ''
@@ -10,7 +10,7 @@ class TicTacToe
   @@player_one_picks = []
   @@player_two_picks = []
   @@turn_timer = 1
-  @@game_board = '
+  @@game_board_start = '
      |     |     
  1   |  2  |  3  
 _____|_____|_____
@@ -21,7 +21,7 @@ _____|_____|_____
  7   |  8  |  9  
      |     |     
   '
-  @@game_board_altered = ''
+  @@game_board = @@game_board_start
 
   private 
 
@@ -64,7 +64,6 @@ _____|_____|_____
 
   def input_checker(input)
     begin
-      binding.pry
       if input <= 0 || input >= 10
         puts "#{input} is not a valid number, please pick between 1-9."
         redo_turn
@@ -93,21 +92,24 @@ _____|_____|_____
 
   def change_game_board_by_input(input)
     if @@turn_timer.odd?
-      
+      @@game_board = @@game_board.sub(input.to_s, "X")
+      puts @@game_board
     else
-      
+      @@game_board = @@game_board.sub(input.to_s, "O")
+      puts @@game_board
     end
     check_for_game_over
   end
 
   def check_for_game_over
+    puts "test"
   end
 
   public
 
   def start_game
     set_player_names
-    puts @@game_board
+    puts @@game_board_start
     player_one_turn
   end
 
