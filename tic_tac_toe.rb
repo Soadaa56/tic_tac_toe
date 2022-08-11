@@ -7,6 +7,7 @@ class TicTacToe
   @@lines = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
   @@x_picks = []
   @@o_picks = []
+  @@turn_timer = 1
   @@game_board = '
      |     |     
  1   |  2  |  3  
@@ -40,14 +41,37 @@ _____|_____|_____
     input_checker(input)
   end
 
+  def redo_turn
+    if @@turn_timer.odd?
+      player_one_turn
+    else
+      player_two_turn
+    end
+  end
+
+  def next_turn
+    @@turn_timer += 1
+    if @@turn_timer.odd?
+      player_one_turn
+    else
+      player_two_turn
+    end
+  end
+
   def input_checker(input)
    if input != Integer
     puts 'This is not a valid input, please try again'
+    redo_turn
    elsif input < 0 || input > 9
     puts 'This is not a valid number, please pick between 0-9.'
+    redo_turn
    else
     square_checker(input)
    end
+  end
+
+  def square_checker(input)
+    
   end
 
   public
