@@ -62,15 +62,16 @@ _____|_____|_____
   end
 
   def input_checker(input)
-   if input != Integer
-    puts "#{input} is not a valid input, please try again."
-    redo_turn
-   elsif input < 0 || input > 9
-    puts "#{input} is not a valid number, please pick between 0-9."
-    redo_turn
-   else
-    square_checker(input)
-   end
+    begin
+      if input < 0 || input > 9
+        puts "#{input} is not a valid number, please picker between 1-9."
+        redo_turn
+    rescue => exception
+      puts "#{input} is not a valid input, please try again."
+      redo_turn
+    else
+      square_checker(input)
+    end
   end
 
   def square_checker(input)
