@@ -74,9 +74,21 @@ _____|_____|_____
     if @@player_one_picks.include?(input) || @@player_two_picks.include?(input)
       puts 'This spot is already taken'
       redo_turn      
+    elsif @@turn_timer.odd?
+      @@player_one_picks.push(input)
+      change_game_board_by_input(input)
     else
-      
+      @@player_two_picks.push(input)
+      change_game_board_by_input(input)
     end
+  end
+
+  def change_game_board_by_input
+    
+    check_for_game_over
+  end
+
+  def check_for_game_over
   end
 
   public
