@@ -4,6 +4,8 @@ require 'pry-byebug'
 class TicTacToe
   attr_reader :game_board
 
+  @player1 = ''
+  @player2 = ''
   @@lines = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
   @@player_one_picks = []
   @@player_two_picks = []
@@ -19,24 +21,25 @@ _____|_____|_____
  7   |  8  |  9  
      |     |     
   '
+  @@game_board_altered = ''
 
   private 
 
   def set_player_names
     puts 'Input player 1 name:'
-    player1 = gets.chomp
+    @player1 = gets.chomp
     puts 'Input player 2 name:'
-    player2 = gets.chomp
+    @player2 = gets.chomp
   end
   
   def player_one_turn
-    "#{player1}, input the numbered square you wish to place an X."
+    puts "#{@player1}, input the numbered square you wish to place an X."
     input = gets.chomp
     input_checker(input)
   end
 
   def player_two_turn
-    "#{player2}, input the numbered square you wish to place an O."
+    puts "#{@player2}, input the numbered square you wish to place an O."
     input = gets.chomp
     input_checker(input)
   end
@@ -85,9 +88,9 @@ _____|_____|_____
 
   def change_game_board_by_input(input)
     if @@turn_timer.odd?
-      
+      player_one_picks.push(input)
     else
-      
+      player_two_picks.push(input)
     end
     check_for_game_over
   end
