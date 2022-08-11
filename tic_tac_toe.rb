@@ -2,7 +2,7 @@
 require 'pry-byebug'
 
 class TicTacToe
-  attr_reader :game_board, :game_board_start
+  attr_reader :game_board, :game_board_start, :@score
 
   @rounds_tied = 0
   @score = Hash.new
@@ -106,15 +106,15 @@ _____|_____|_____
   end
 
   def check_for_game_over
-   if @@lines.any? { |line| line == @@player_one_picks}
+   if @@lines.any? { |line| line == @@player_one_picks }
     victory_player1
-    
-   elsif 
-    
+   elsif @@lines.any? { |line| line == @@player_two_picks }
+    victory_player2
+   elsif @@game_board.match?(/([1-9])/)
+    next_turn
    else
-    
+    tied_game
    end
-    end
   end
 
   def victory_player1
@@ -127,11 +127,16 @@ _____|_____|_____
     @score[@player1] += 1
   end
 
+  def tied_game
+    "Dang, there was a tie!"
+    @score[ties] += 1
+  end
+
   public
 
   def start_game
     set_player_names
-
+    @score[ties] = 0
     puts @@game_board_start
     player_one_turn
   end
