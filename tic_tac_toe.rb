@@ -5,8 +5,8 @@ class TicTacToe
   attr_reader :game_board
 
   @@lines = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
-  @@x_picks = []
-  @@o_picks = []
+  @@player_one_picks = []
+  @@player_two_picks = []
   @@turn_timer = 1
   @@game_board = '
      |     |     
@@ -71,7 +71,12 @@ _____|_____|_____
   end
 
   def square_checker(input)
-    
+    if @@player_one_picks.include?(input) || @@player_two_picks.include?(input)
+      puts 'This spot is already taken'
+      redo_turn      
+    else
+      
+    end
   end
 
   public
