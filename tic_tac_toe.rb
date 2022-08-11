@@ -4,6 +4,8 @@ require 'pry-byebug'
 class TicTacToe
   attr_reader :game_board, :game_board_start
 
+  @rounds_tied = 0
+  @score = Hash.new
   @player1 = ''
   @player2 = ''
   @@lines = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
@@ -28,8 +30,10 @@ _____|_____|_____
   def set_player_names
     puts 'Input player 1 name:'
     @player1 = gets.chomp
+    @score[@player1] = 0
     puts 'Input player 2 name:'
     @player2 = gets.chomp
+    @score[@player1] = 0
   end
   
   def player_one_turn
@@ -102,15 +106,45 @@ _____|_____|_____
   end
 
   def check_for_game_over
-    puts "test"
+   if @@lines.any? { |line| line == @@player_one_picks}
+    victory_player1
+    
+   elsif 
+    
+   else
+    
+   end
+    end
+  end
+
+  def victory_player1
+    "Congratulations #{@player1}, you win!"
+    @score[@player1] += 1
+  end
+
+  def victory_player2
+    "Congratulations #{@player2}, you win!"
+    @score[@player1] += 1
   end
 
   public
 
   def start_game
     set_player_names
+
     puts @@game_board_start
     player_one_turn
+  end
+
+  def restart
+    @@player_one_picks = []
+    @@player_two_picks = []
+    @@turn_timer = 1
+    @@game_board = @@game_board_start
+  end
+
+  def score
+    return @score
   end
 
 end
