@@ -60,10 +60,10 @@ _____|_____|_____
 
   def input_checker(input)
    if input != Integer
-    puts 'This is not a valid input, please try again'
+    puts "#{input} is not a valid input, please try again."
     redo_turn
    elsif input < 0 || input > 9
-    puts 'This is not a valid number, please pick between 0-9.'
+    puts "#{input} is not a valid number, please pick between 0-9."
     redo_turn
    else
     square_checker(input)
@@ -72,7 +72,7 @@ _____|_____|_____
 
   def square_checker(input)
     if @@player_one_picks.include?(input) || @@player_two_picks.include?(input)
-      puts 'This spot is already taken'
+      puts "Spot #{input} is already taken."
       redo_turn      
     elsif @@turn_timer.odd?
       @@player_one_picks.push(input)
@@ -83,8 +83,12 @@ _____|_____|_____
     end
   end
 
-  def change_game_board_by_input
-    
+  def change_game_board_by_input(input)
+    if @@turn_timer.odd?
+      
+    else
+      
+    end
     check_for_game_over
   end
 
