@@ -103,9 +103,9 @@ _____|_____|_____
 
 # #any? will not match if numbers are out of order, redo!
   def check_for_game_over
-   if @@lines.any? { |line| line == @@player_one_picks }
+   if @@lines.any? { |line| (line - @@player_one_picks).size == 0 }
     victory_player1
-   elsif @@lines.any? { |line| line == @@player_two_picks }
+   elsif @@lines.any? { |line| (line - @@player_two_picks).size == 0 }
     victory_player2
    elsif @@game_board.match?(/([1-9])/)
     next_turn
@@ -130,7 +130,6 @@ _____|_____|_____
 
   def start_game
     set_player_names
-    @@score['ties'] = 0
     puts @@game_board_start
     player_one_turn
   end
